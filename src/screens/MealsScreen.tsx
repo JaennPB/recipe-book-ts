@@ -1,12 +1,16 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-interface Props {}
+import { RouteProp, useRoute } from "@react-navigation/native";
+import type { StackParams } from "../../App";
 
-const MealsScreen: React.FC<Props> = (props: Props) => {
+const MealsScreen: React.FC = () => {
+  const route = useRoute<RouteProp<StackParams, "MealsScreen">>();
+  const catId = route.params.categoryId;
+
   return (
     <View>
-      <Text>MealsScreen</Text>
+      <Text>MealsScreen, {catId}</Text>
     </View>
   );
 };

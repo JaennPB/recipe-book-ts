@@ -7,11 +7,12 @@ import Category from "../models/category";
 import CategoryGridBox from "../components/CategoryGridBox";
 
 const CategoryScreen: React.FC = () => {
-  function renderCategoryItemHandler(
+  function renderCategoriesHandler(
     itemData: ListRenderItemInfo<Category>
   ): JSX.Element {
     return (
       <CategoryGridBox
+        id={itemData.item.id}
         title={itemData.item.title}
         color={itemData.item.color}
       />
@@ -23,7 +24,7 @@ const CategoryScreen: React.FC = () => {
       <FlatList
         data={CATEGORIES}
         keyExtractor={(item) => item.id}
-        renderItem={renderCategoryItemHandler}
+        renderItem={renderCategoriesHandler}
         numColumns={2}
       />
     </Center>

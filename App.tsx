@@ -9,7 +9,7 @@ import MealsScreen from "./src/screens/MealsScreen";
 
 export type StackParams = {
   CategoriesScreen: undefined;
-  MealsScreen: undefined;
+  MealsScreen: { categoryId: number };
 };
 
 const RootStack = createNativeStackNavigator<StackParams>();
