@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Pressable } from "native-base";
+import { Pressable, Heading } from "native-base";
 
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -9,10 +9,10 @@ type MealsScreenProp = NativeStackNavigationProp<StackParams>;
 interface Props {
   id: number;
   title: string;
-  color: string;
+  color?: string;
 }
 
-const CategoryGridBox: React.FC<Props> = (props: Props) => {
+const CategoryItemCard: React.FC<Props> = (props: Props) => {
   const navigation = useNavigation<MealsScreenProp>();
 
   function navigateToMealsHandler(): void {
@@ -32,9 +32,11 @@ const CategoryGridBox: React.FC<Props> = (props: Props) => {
       shadow="4"
       onPress={navigateToMealsHandler}
     >
-      <Text>{props.title}</Text>
+      <Heading size="sm" color="white">
+        {props.title}
+      </Heading>
     </Pressable>
   );
 };
 
-export default CategoryGridBox;
+export default CategoryItemCard;

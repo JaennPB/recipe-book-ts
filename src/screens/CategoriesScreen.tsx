@@ -4,14 +4,14 @@ import { Center } from "native-base";
 
 import { CATEGORIES } from "../data/data";
 import Category from "../models/category";
-import CategoryGridBox from "../components/CategoryGridBox";
+import CategoryItemCard from "../components/CategoryItemCard";
 
 const CategoryScreen: React.FC = () => {
   function renderCategoriesHandler(
     itemData: ListRenderItemInfo<Category>
   ): JSX.Element {
     return (
-      <CategoryGridBox
+      <CategoryItemCard
         id={itemData.item.id}
         title={itemData.item.title}
         color={itemData.item.color}
