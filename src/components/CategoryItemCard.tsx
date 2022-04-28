@@ -16,7 +16,10 @@ const CategoryItemCard: React.FC<Props> = (props: Props) => {
   const navigation = useNavigation<MealsScreenProp>();
 
   function navigateToMealsHandler(): void {
-    navigation.navigate("MealsScreen", { categoryId: props.id });
+    navigation.navigate("MealsScreen", {
+      categoryId: props.id,
+      categoryTitle: props.title,
+    });
   }
 
   return (

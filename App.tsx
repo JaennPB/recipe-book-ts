@@ -9,7 +9,7 @@ import MealsScreen from "./src/screens/MealsScreen";
 
 export type StackParams = {
   CategoriesScreen: undefined;
-  MealsScreen: { categoryId: number };
+  MealsScreen: { categoryId: number; categoryTitle: string };
 };
 
 const RootStack = createNativeStackNavigator<StackParams>();
@@ -22,6 +22,7 @@ const App: React.FC = () => {
           <RootStack.Screen
             name="CategoriesScreen"
             component={CategoriesScreen}
+            options={{ headerTitle: "Categories" }}
           />
           <RootStack.Screen name="MealsScreen" component={MealsScreen} />
         </RootStack.Navigator>
