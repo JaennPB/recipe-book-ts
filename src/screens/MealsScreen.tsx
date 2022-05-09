@@ -30,6 +30,7 @@ const MealsScreen: React.FC = () => {
 
     return (
       <MealItemBox
+        id={meal.id}
         title={meal.title}
         complexity={meal.complexity}
         duration={meal.duration}

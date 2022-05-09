@@ -9,7 +9,13 @@ import {
   Flex,
 } from "native-base";
 
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { StackParams } from "../../App";
+type MealDetailsScreenProp = NativeStackNavigationProp<StackParams>;
+
 interface Props {
+  id: string;
   title: string;
   duration: number;
   complexity: number;
@@ -17,8 +23,19 @@ interface Props {
 }
 
 const MealItemBox: React.FC<Props> = (props: Props) => {
+  const navigation = useNavigation<MealDetailsScreenProp>();
+
+  function navigateToMealDetailsHandler(): void {
+    navigation.navigate("MealDetailsScreen", {
+      mealId: props.id,
+    });
+  }
+
   return (
-    <Pressable _pressed={{ opacity: 0.8 }}>
+    <Pressable
+      _pressed={{ opacity: 0.8 }}
+      onPress={navigateToMealDetailsHandler}
+    >
       <Box
         m={5}
         borderRadius={10}
