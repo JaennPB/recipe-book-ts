@@ -2,6 +2,9 @@ import React from "react";
 import "react-native-gesture-handler";
 import { NativeBaseProvider } from "native-base";
 
+import { Provider } from "react-redux";
+import { store } from "./src/app/store";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -41,22 +44,24 @@ function DrawerNavigator() {
 
 const App: React.FC = () => {
   return (
-    <NativeBaseProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="DrawerCategoriesScreen"
-            component={DrawerNavigator}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="MealsScreen" component={MealsScreen} />
-          <Stack.Screen
-            name="MealDetailsScreen"
-            component={MealDetailsScreen}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </NativeBaseProvider>
+    <Provider store={store}>
+      <NativeBaseProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="DrawerCategoriesScreen"
+              component={DrawerNavigator}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="MealsScreen" component={MealsScreen} />
+            <Stack.Screen
+              name="MealDetailsScreen"
+              component={MealDetailsScreen}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </NativeBaseProvider>
+    </Provider>
   );
 };
 
