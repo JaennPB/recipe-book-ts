@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Text,
+  Icon,
   Image,
   AspectRatio,
   Flex,
@@ -18,14 +18,33 @@ import { MEALS } from "../data/data";
 import IngredientItem from "../components/IngredientItem";
 import StepItem from "../components/StepItem";
 
+import { AntDesign } from "@expo/vector-icons";
+
 const MealDetailsScreen: React.FC = () => {
   const route = useRoute<RouteProp<StackParams, "MealDetailsScreen">>();
   const navigation = useNavigation<MealDetailsScreenProp>();
   const selectedMeal = MEALS.find((item) => item.id === route.params.mealId)!;
+  const [heartState, setHeartState] = React.useState<string>("hearto");
+
+  function favoriteMealHandler(): void {
+    setHeartState("heart");
+    console.log("pressed!");
+  }
 
   React.useLayoutEffect(() => {
-    navigation.setOptions({ title: selectedMeal.title });
-  }, [selectedMeal]);
+    navigation.setOptions({
+      title: selectedMeal.title,
+      headerRight: () => (
+        <Icon
+          as={AntDesign}
+          name={heartState}
+          color="amber.400"
+          size={5}
+          onPress={favoriteMealHandler}
+        />
+      ),
+    });
+  }, [selectedMeal, heartState]);
 
   return (
     <ScrollView>
