@@ -20,15 +20,23 @@ import StepItem from "../components/StepItem";
 
 import { AntDesign } from "@expo/vector-icons";
 
+import { addMealToFavorites, removeMealfromFavorites } from "../app/mainSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+
 const MealDetailsScreen: React.FC = () => {
   const route = useRoute<RouteProp<StackParams, "MealDetailsScreen">>();
   const navigation = useNavigation<MealDetailsScreenProp>();
   const selectedMeal = MEALS.find((item) => item.id === route.params.mealId)!;
-  const [heartState, setHeartState] = React.useState<string>("hearto");
+  const mealId = selectedMeal.id;
+  const dispatch = useAppDispatch();
+  const favoriteMealsArray = useAppSelector((state) => state.favorites);
 
-  function favoriteMealHandler(): void {
-    setHeartState("heart");
-    console.log("pressed!");
+  function favoriteMealHandlerToggle(): void {
+    if (favoriteMealsArray.includes(mealId)) {
+      dispatch(removeMealfromFavorites(mealId));
+    } else {
+      dispatch(addMealToFavorites(mealId));
+    }
   }
 
   React.useLayoutEffect(() => {
@@ -37,14 +45,14 @@ const MealDetailsScreen: React.FC = () => {
       headerRight: () => (
         <Icon
           as={AntDesign}
-          name={heartState}
+          name={favoriteMealsArray.includes(mealId) ? "heart" : "hearto"}
           color="amber.400"
           size={5}
-          onPress={favoriteMealHandler}
+          onPress={favoriteMealHandlerToggle}
         />
       ),
     });
-  }, [selectedMeal, heartState]);
+  }, [selectedMeal, favoriteMealsArray, mealId]);
 
   return (
     <ScrollView>

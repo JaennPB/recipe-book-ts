@@ -12,8 +12,15 @@ const mainSlice = createSlice({
   name: "main",
   initialState,
   reducers: {
-    addMealToFavorites: () => {},
-    removeMealfromFavorites: () => {},
+    addMealToFavorites: (state, action: PayloadAction<string>) => {
+      if (state.favorites.includes(action.payload)) return;
+      state.favorites.push(action.payload);
+    },
+    removeMealfromFavorites: (state, action: PayloadAction<string>) => {
+      state.favorites = state.favorites.filter(
+        (item) => item !== action.payload
+      );
+    },
   },
 });
 
